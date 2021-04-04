@@ -60,8 +60,8 @@ function App() {
     try {
       const response = await fetch(baseUrl + `/favorites`)
       const json = await response.json()
-      const favorites = json.map(({ id, url, description }) => {
-        return { id, description, url }
+      const favorites = json.map(({ id, unsplash_id, url, description }) => {
+        return { id, unsplash_id, description, url }
       })
       setFavorites(favorites)
     } catch (error) {

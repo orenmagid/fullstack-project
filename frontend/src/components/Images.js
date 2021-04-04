@@ -10,9 +10,8 @@ const Images = ({ images, handleFavorite, favorites, isMobile }) => {
       <Grid columns={isMobile ? 1 : 4}>
         {images.map(({ id, url, description, alt_description }) => {
           // Determine which results are already favorites so as to disable button
-          // TODO: Should probably be using unsplash_id rather than url, even though the latter is also unique, but haven't passed it in yet.
           const alreadyFavorited =
-            favorites.map((favorite) => favorite.url).indexOf(url) > -1
+            favorites.map((favorite) => favorite.unsplash_id).indexOf(id) > -1
               ? true
               : false
           return (
