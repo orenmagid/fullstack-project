@@ -11,7 +11,7 @@ afterEach(() => {
 })
 
 test("calls handleSubmit when submit button is clicked and form HAS user input", () => {
-  // Arrange
+  // ARRANGE
   render(
     <SearchForm
       handleSubmit={handleSubmit}
@@ -20,17 +20,17 @@ test("calls handleSubmit when submit button is clicked and form HAS user input",
     />
   )
 
-  // Act
+  // ACT
   fireEvent.click(screen.getByText("Submit"))
 
-  // Assert
+  // ASSERT
   expect(handleSubmit).toHaveBeenCalledTimes(1)
 })
 
 // TODO: Test form submission using keyboard input. Currently, firing keyDown event on submit button isn't submitting form.
 
 // test("calls handleSubmit when form is submitted using keyboard controls and form HAS user input", () => {
-//   // Arrange
+//   // ARRANGE
 //   render(
 //     <SearchForm
 //       handleSubmit={handleSubmit}
@@ -39,16 +39,16 @@ test("calls handleSubmit when submit button is clicked and form HAS user input",
 //     />
 //   )
 
-//   // Act
+//   // ACT
 //   fireEvent.focus(screen.getByText("Submit"))
 //   fireEvent.keyDown(screen.getByText("Submit"), { key: "Enter", code: "Enter" })
 
-//   // Assert
+//   // ASSERT
 //   expect(handleSubmit).toHaveBeenCalledTimes(1)
 // })
 
 test("does not call handleSubmit when submit button is clicked and form DOES NOT HAVE user input", () => {
-  // Arrange
+  // ARRANGE
   render(
     <SearchForm
       handleSubmit={handleSubmit}
@@ -57,9 +57,9 @@ test("does not call handleSubmit when submit button is clicked and form DOES NOT
     />
   )
 
-  // Act
+  // ACT
   fireEvent.click(screen.getByText("Submit"))
 
-  // Assert
+  // ASSERT
   expect(handleSubmit).toHaveBeenCalledTimes(0)
 })

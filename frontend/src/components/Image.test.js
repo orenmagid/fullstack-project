@@ -12,20 +12,20 @@ const fakeImageProp = {
 const handleFavorite = jest.fn()
 
 test("calls handleFavorite when non-disabled favorites button is clicked", () => {
-  // Arrange
+  // ARRANGE
   render(<Image {...fakeImageProp} handleFavorite={handleFavorite} />)
 
-  // Act
+  // ACT
   fireEvent.click(screen.getByText("Save to Favorites"))
 
-  // Assert
+  // ASSERT
   expect(handleFavorite).toHaveBeenCalledTimes(1)
 })
 
 test("displays proper message when disabled (because it's a favorite already)", () => {
-  // Arrange
+  // ARRANGE
   render(<Image {...fakeImageProp} buttonDisabled={true} />)
 
-  // Assert
+  // ASSERT
   expect(screen.getByText("You love this image!")).not.toBeNull()
 })
