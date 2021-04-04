@@ -2,12 +2,12 @@ import React from "react"
 import { Segment, Grid, Header } from "semantic-ui-react"
 import Image from "./Image"
 
-const Images = ({ images, handleFavorite, favorites }) => {
+const Images = ({ images, handleFavorite, favorites, isMobile }) => {
   return (
     <Segment>
       <Header as="h2">Search Results</Header>
 
-      <Grid columns={4}>
+      <Grid columns={isMobile ? 1 : 4}>
         {images.map(({ id, url, description, alt_description }) => {
           // Determine which results are already favorites so as to disable button
           // TODO: Should probably be using unsplash_id rather than url, even though the latter is also unique, but haven't passed it in yet.

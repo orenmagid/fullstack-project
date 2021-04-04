@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Container, Segment, Header } from "semantic-ui-react"
+import { useMediaQuery } from "react-responsive"
 import SearchForm from "./components/SearchForm"
 import Images from "./components/Images"
 import Favorites from "./components/Favorites"
@@ -11,6 +12,9 @@ function App() {
   const [error, setError] = useState(null)
   const [query, setQuery] = useState("")
   const [favorites, setFavorites] = useState([])
+
+  // Check for screen width to pass prop used to layout Images/Favorites
+  const isMobile = useMediaQuery({ query: "(max-width: 700px)" })
 
   // GET SEARCH QUERY FROM USER INPUT
   const handleQueryChange = (e) => {
@@ -101,12 +105,15 @@ function App() {
           error={error}
           query={query}
         />
-        {favorites.length > 0 ? <Favorites favorites={favorites} /> : null}
+        {favorites.length > 0 ? (
+          <Favorites favorites={favorites} isMobile={isMobile} />
+        ) : null}
         {images.length > 0 ? (
           <Images
             images={images}
             favorites={favorites}
             handleFavorite={handleFavorite}
+            isMobile={isMobile}
           />
         ) : null}
       </Segment>
