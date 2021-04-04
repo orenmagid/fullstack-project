@@ -63,6 +63,10 @@ function App() {
       const favorites = json.map(({ id, unsplash_id, url, description }) => {
         return { id, unsplash_id, description, url }
       })
+      // If successful, clear error if it exists
+      if (error) {
+        setError(null)
+      }
       setFavorites(favorites)
     } catch (error) {
       // Catch error and return empty array of images
