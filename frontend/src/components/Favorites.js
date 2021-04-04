@@ -2,11 +2,11 @@ import React from "react"
 import { Segment, Grid, Header } from "semantic-ui-react"
 import Image from "./Image"
 
-const Favorites = ({ favorites }) => {
+const Favorites = ({ favorites, isMobile }) => {
   return (
     <Segment>
       <Header as="h2">Favorites</Header>
-      <Grid columns={4}>
+      <Grid columns={isMobile ? 1 : 4}>
         {favorites.map(({ id, url, description, alt_description }) => {
           return (
             <Image
