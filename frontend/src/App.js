@@ -21,6 +21,13 @@ function App() {
     setQuery(e.target.value)
   }
 
+  // FOR CLEARING ERROR AFTER SUCCESSFUL SEARCH
+  const clearError = () => {
+    if (error) {
+      setError(null)
+    }
+  }
+
   // FETCH IMAGES
   const fetchImages = async () => {
     try {
@@ -33,10 +40,7 @@ function App() {
           return { id, description, alt_description, url: urls.regular }
         }
       )
-      // If successful, clear error if it exists
-      if (error) {
-        setError(null)
-      }
+      clearError()
       return images
     } catch (error) {
       // Catch error, display error message, and return empty array of images
@@ -63,10 +67,7 @@ function App() {
       const favorites = json.map(({ id, unsplash_id, url, description }) => {
         return { id, unsplash_id, description, url }
       })
-      // If successful, clear error if it exists
-      if (error) {
-        setError(null)
-      }
+      clearError()
       setFavorites(favorites)
     } catch (error) {
       // Catch error and return empty array of images
