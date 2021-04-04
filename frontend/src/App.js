@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { Container, Segment } from "semantic-ui-react"
+import { Container, Segment, Header } from "semantic-ui-react"
 import SearchForm from "./components/SearchForm"
+import Images from "./components/Images"
 import { baseUrl } from "./constants"
 import "./App.css"
 
@@ -21,9 +22,11 @@ function App() {
         baseUrl + `/images/search?search_text=${query}`
       )
       const json = await response.json()
-      const images = json.results.map(({ id, urls, description }) => {
-        return { id, description, url: urls.regular }
-      })
+      const images = json.results.map(
+        ({ id, urls, description, alt_description }) => {
+          return { id, description, alt_description, url: urls.regular }
+        }
+      )
       // If successful, clear error if it exists
       if (error) {
         setError(null)
@@ -41,13 +44,15 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const images = await fetchImages()
-    setImages(images)
+    const fetchedImages = await fetchImages()
+
+    setImages(fetchedImages)
   }
 
   return (
     <Container textAlign="center">
       <Segment className="wrapper">
+        <Header as="h1">ReSplash</Header>
         <SearchForm
           handleSubmit={handleSubmit}
           handleQueryChange={handleQueryChange}
@@ -55,7 +60,7 @@ function App() {
           query={query}
         />
 
-        {/* Images */}
+        {images.length > 0 ? <Images images={images} /> : null}
         {/* Favorites */}
       </Segment>
     </Container>
