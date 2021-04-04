@@ -11,7 +11,7 @@ class Unsplash
   # Search Unsplash API
   def search
     url = "/search/photos?query=#{@search_text}&per_page=100&client_id=#{@client_id}"
-    self.class.get(url).body
+    response = self.class.get(url).body
   rescue StandardError => e
     puts "The application encountered the following error while attempting to search the Unsplash API: #{e}"
   end
