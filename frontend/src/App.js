@@ -25,9 +25,7 @@ function App() {
 
   // FOR CLEARING ERROR AFTER SUCCESSFUL SEARCH
   const clearError = () => {
-    if (error) {
-      setError(null)
-    }
+    if (error) setError(null)
   }
 
   // FETCH IMAGES
@@ -42,7 +40,7 @@ function App() {
           return { id, description, alt_description, url: urls.regular }
         }
       )
-      // If no image results, set noSearchResults to true. Otherwise, if it's true, set it to false.
+      // Handle no search results returned from API
       if (images.length === 0) setNoSearchResults(true)
       else if (noSearchResults) setNoSearchResults(false)
 
@@ -62,7 +60,6 @@ function App() {
     e.preventDefault()
 
     const fetchedImages = await fetchImages()
-
     setImages(fetchedImages)
   }
 
