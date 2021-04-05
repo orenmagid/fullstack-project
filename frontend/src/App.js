@@ -10,6 +10,7 @@ import "./App.css"
 function App() {
   const [images, setImages] = useState([])
   const [error, setError] = useState(null)
+  const [noSearchResults, setNoSearchResults] = useState(false)
   const [query, setQuery] = useState("")
   const [favorites, setFavorites] = useState([])
 
@@ -18,6 +19,7 @@ function App() {
 
   // GET SEARCH QUERY FROM USER INPUT
   const handleQueryChange = (e) => {
+    if (noSearchResults) setNoSearchResults(false)
     setQuery(e.target.value)
   }
 
@@ -40,10 +42,15 @@ function App() {
           return { id, description, alt_description, url: urls.regular }
         }
       )
+      // If no image results, set noSearchResults to true. Otherwise, if it's true, set it to false.
+      if (images.length === 0) setNoSearchResults(true)
+      else if (noSearchResults) setNoSearchResults(false)
+
       clearError()
       return images
     } catch (error) {
-      // Catch error, display error message, and return empty array of images
+      // Catch error, ensure noSearchResults is false, display error message, and return empty array of images
+      if (noSearchResults) setNoSearchResults(false)
       setError("Something went wrong with the search. Please try again.")
       console.error(error)
       return []
@@ -108,6 +115,7 @@ function App() {
           handleSubmit={handleSubmit}
           handleQueryChange={handleQueryChange}
           error={error}
+          noSearchResults={noSearchResults}
           query={query}
         />
         {favorites.length > 0 ? (
